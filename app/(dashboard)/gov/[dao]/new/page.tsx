@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { ABI } from "@/lib/pumpABI";
-import { DAO_Addresses } from "@/lib/metadata";
+import { Addresses } from "@/lib/metadata";
 import { useParams } from "next/navigation";
 
 // Type definitions
@@ -102,7 +102,7 @@ const NewProposalForm: React.FC = () => {
         return;
       }
 
-      const governorAddress = DAO_Addresses.tangelo as `0x${string}`;
+      const governorAddress = Addresses.tangelo as `0x${string}`;
       if (!governorAddress) {
         throw new Error("Invalid DAO address");
       }

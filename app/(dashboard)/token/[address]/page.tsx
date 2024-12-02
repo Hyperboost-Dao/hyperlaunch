@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Settings, Maximize, Camera } from "lucide-react";
 import { createChart, ColorType } from "lightweight-charts";
 import ReactMarkdown from "react-markdown";
+import { useSearchParams } from "next/navigation";
 
 interface TokenData {
   name: string;
@@ -18,9 +19,11 @@ interface TokenData {
 }
 
 const TradingPage = () => {
-  const [amount, setAmount] = useState("0.0");
+  const [amount, setAmount] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState("5m");
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const isCompleted = searchParams.get("completed") !== null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const chartRef = useRef<any>(null);
 
@@ -373,6 +376,73 @@ Join Tangelo DAO and experience the future of private, decentralized governance.
     }
   }, []);
 
+  const CompletedPanel = () => (
+    <div className="lg:col-span-1">
+      <Card className="bg-gray-950 border-gray-700">
+        <CardContent className="p-6">
+          <div className="text-center space-y-4">
+            <h3 className="text-xl font-bold text-green-500">
+              Bonding Curve Completed
+            </h3>
+            <p className="text-gray-300">
+              Please wait for AMM to create pair and Add Liquidity for trading
+            </p>
+            <p className="text-gray-300">
+              TGL and USDC are already be sent to DEX
+            </p>
+            <div className="mt-6">
+              <div className="w-full h-2 bg-green-500 rounded"></div>
+              <p className="mt-2 text-green-500 font-medium">100% Complete</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  const TradingPanel = () => (
+    <div className="lg:col-span-1">
+      <Card className="bg-gray-950 border-gray-700">
+        <CardContent className="p-4">
+          <div className="flex justify-between mb-4">
+            <button className="w-1/2 py-2 bg-green-500 rounded-l">buy</button>
+            <button className="w-1/2 py-2 bg-gray-700 rounded-r">sell</button>
+          </div>
+
+          <div className="mb-4">
+            <div className="flex justify-between items-center mb-2"></div>
+
+            <div className="flex items-center bg-gray-700 rounded p-2">
+              <input
+                type="text"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="flex-1 bg-transparent outline-none"
+              />
+              <span>USDT</span>
+            </div>
+          </div>
+
+          <button className="w-full py-3 bg-green-500 rounded mb-4">
+            place trade
+          </button>
+
+          <div className="text-sm text-gray-400">
+            <div className="flex justify-between mb-2">
+              <span>bonding curve progress:</span>
+              <span>19%</span>
+            </div>
+            <div className="w-full h-2 bg-gray-700 rounded mb-2">
+              <div className="w-[19%] h-full bg-green-500 rounded"></div>
+            </div>
+            <div>graduate this coin to dex at $98,571 market cap</div>
+            <div>there is 50.735 USDC in the bonding curve</div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
       {/* Header */}
@@ -460,74 +530,7 @@ Join Tangelo DAO and experience the future of private, decentralized governance.
         </div>
 
         {/* Trading Panel */}
-        {/* <div className="lg:col-span-1">
-          <Card className="bg-gray-950 border-gray-700">
-            <CardContent className="p-4">
-              <div className="flex justify-between mb-4">
-                <button className="w-1/2 py-2 bg-green-500 rounded-l">
-                  buy
-                </button>
-                <button className="w-1/2 py-2 bg-gray-700 rounded-r">
-                  sell
-                </button>
-              </div>
-
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2"></div>
-
-                <div className="flex items-center bg-gray-700 rounded p-2">
-                  <input
-                    type="text"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="flex-1 bg-transparent outline-none"
-                  />
-                  <span>USDT</span>
-                </div>
-              </div>
-
-              <button className="w-full py-3 bg-green-500 rounded mb-4">
-                place trade
-              </button>
-
-              <div className="text-sm text-gray-400">
-                <div className="flex justify-between mb-2">
-                  <span>bonding curve progress:</span>
-                  <span>19%</span>
-                </div>
-                <div className="w-full h-2 bg-gray-700 rounded mb-2">
-                  <div className="w-[19%] h-full bg-green-500 rounded"></div>
-                </div>
-                <div>graduate this coin to dex at $98,571 market cap</div>
-                <div>there is 50.735 USDC in the bonding curve</div>
-              </div>
-            </CardContent>
-          </Card>
-        </div> */}
-        <div className="lg:col-span-1">
-          <Card className="bg-gray-950 border-gray-700">
-            <CardContent className="p-6">
-              <div className="text-center space-y-4">
-                <h3 className="text-xl font-bold text-green-500">
-                  Bonding Curve Completed
-                </h3>
-                <p className="text-gray-300">
-                  Please wait for AMM to create pair and Add Liquidity for
-                  trading
-                </p>
-                <p className="text-gray-300">
-                  TGL and USDC are already be sent to DEX
-                </p>
-                <div className="mt-6">
-                  <div className="w-full h-2 bg-green-500 rounded"></div>
-                  <p className="mt-2 text-green-500 font-medium">
-                    100% Complete
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {isCompleted ? <CompletedPanel /> : <TradingPanel />}
       </div>
     </div>
   );

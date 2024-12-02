@@ -16,7 +16,7 @@ function Navbar() {
             </span>
           </a>
           <div className="flex gap-12">
-            <Link href={"/create"}> Live Projects</Link>
+            <Link href={"/"}> Live Projects</Link>
             <Link href={"/create"}> Create Bonding Curve</Link>
           </div>
 

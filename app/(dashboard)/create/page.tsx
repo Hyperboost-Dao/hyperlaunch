@@ -47,8 +47,6 @@ const NewProposalForm: React.FC = () => {
   const [target, setTarget] = useState<string>("");
   const [totalSupply, setTotalSupply] = useState<string>("");
   const [markdownContent, setMarkdownContent] = useState<string>("");
-  const [targetAddress, setTargetAddress] = useState<string>("");
-  const [calldata, setCalldata] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
@@ -107,9 +105,6 @@ const NewProposalForm: React.FC = () => {
     if (!markdownContent.trim()) {
       return false;
     }
-    if (!targetAddress.trim() || !calldata.trim()) {
-      return false;
-    }
     return true;
   };
 
@@ -128,16 +123,14 @@ const NewProposalForm: React.FC = () => {
       }
 
       // Prepare proposal data
-      const targets: `0x${string}`[] = [targetAddress as `0x${string}`];
       const values: bigint[] = [BigInt(0)]; // Using 0 ETH as default
-      const calldataArray: `0x${string}`[] = [calldata as `0x${string}`];
       const description = `# ${title}\n\n${markdownContent}`;
 
       await writeContract({
         address: governorAddress,
         abi: ABI,
         functionName: "propose",
-        args: [targets, values, calldataArray, description],
+        args: [values, description],
       });
     } catch (err: unknown) {
       console.error("Error creating proposal:", err);

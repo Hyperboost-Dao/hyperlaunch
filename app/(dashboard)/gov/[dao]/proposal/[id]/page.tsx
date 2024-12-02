@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useWriteContract } from "wagmi";
 import { ABI } from "@/lib/pumpABI";
-import { DAO_Addresses } from "@/lib/metadata";
+import { Addresses } from "@/lib/metadata";
 import Markdown from "react-markdown";
 
 // Define types for the proposal data
@@ -56,7 +56,7 @@ const DaoProposalView: React.FC = () => {
     setIsVoting(true);
     try {
       await writeContract({
-        address: DAO_Addresses.tangelo as `0x${string}`, // Type assertion for hex address
+        address: Addresses.tangelo as `0x${string}`, // Type assertion for hex address
         abi: ABI,
         functionName: "castVote",
         args: [proposalData.id, selectedVote === "for" ? 0 : 1],
