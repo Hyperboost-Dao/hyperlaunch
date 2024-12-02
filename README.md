@@ -3,5 +3,5 @@ Pitch:
 
 
 Live link:
-https://tangelo-dao.vercel.app/
+
 
