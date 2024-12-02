@@ -5,6 +5,7 @@ import { ArrowLeft, Settings, Maximize, Camera } from "lucide-react";
 import { createChart, ColorType } from "lightweight-charts";
 import ReactMarkdown from "react-markdown";
 import { useSearchParams } from "next/navigation";
+import { chartData } from "@/lib/chart";
 
 interface TokenData {
   name: string;
@@ -363,7 +364,9 @@ Join Tangelo DAO and experience the future of private, decentralized governance.
         wickDownColor: "#ef4444",
       });
 
-      candlestickSeries.setData(candleData);
+      candlestickSeries.setData(
+        chartData["0xfec707AF887414EB92663c6EA3800ee5a5ED75c6"]
+      );
 
       window.addEventListener("resize", handleResize);
 
