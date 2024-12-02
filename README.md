@@ -28,7 +28,7 @@ Network ready to use.
 URI: http://127.0.0.1:9650
 NodeID: NodeID-Q6Jn6NkKV9si19KCC9Kki4CHpuXqFETXr
 
-Your blockchain control keys: [P-fuji1vdylf387kaga22racat3su67dyrw7j5jj90q9u]
-Your subnet auth keys for chain creation: [P-fuji1vdylf387kaga22racat3su67dyrw7j5jj90q9u]
-CreateSubnetTx fee: 0.000010278 AVAX
-Subnet has been created with ID: rShhayGhqAJALdW3ovaqU87vYtcZD3bBxBRtt6qZPV7E4APkg
+- Your blockchain control keys: [P-fuji1vdylf387kaga22racat3su67dyrw7j5jj90q9u]
+- Your subnet auth keys for chain creation: [P-fuji1vdylf387kaga22racat3su67dyrw7j5jj90q9u]
+- CreateSubnetTx fee: 0.000010278 AVAX
+- Subnet has been created with ID: rShhayGhqAJALdW3ovaqU87vYtcZD3bBxBRtt6qZPV7E4APkg
