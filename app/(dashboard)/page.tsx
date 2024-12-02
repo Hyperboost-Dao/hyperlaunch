@@ -37,7 +37,7 @@ export default function Home() {
               <Image src="/acoin.png" width={260} height={260} alt="Aurum" />
             </div>
             <div className="text-sm opacity-75">
-              A play on "DeFi" with a rebellious touch.
+              A play on &quot;DeFi&quot; with a rebellious touch.
             </div>
           </div>
         </Link>
